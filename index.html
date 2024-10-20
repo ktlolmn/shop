@@ -199,6 +199,7 @@
 
         async function submitOrder(event) {
             event.preventDefault();
+            window.scroll = "none"
             const product = currentProducts.find(p => p.row === selectedProductRow);
             
             const formData = new FormData();
