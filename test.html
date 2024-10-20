@@ -1,0 +1,20 @@
+document.getElementById('productForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('action', 'add');
+    formData.append('name', document.getElementById('productName').value);
+    formData.append('price', document.getElementById('productPrice').value);
+    formData.append('image', document.getElementById('productImage').value);
+    formData.append('description', document.getElementById('productDesc').value);
+
+    try {
+        await fetch(api, {
+            method: 'POST',
+            body: formData
+        });
+        loadProducts();
+        e.target.reset();
+    } catch (error) {
+        console.error('Error adding product:', error);
+    }
+}); 

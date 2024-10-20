@@ -1,0 +1,119 @@
+body {
+    font-family: "Rethink Sans", sans-serif;;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    text-align: center;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 30px;
+}
+
+header img {
+    width: 100px;
+    border-radius: 50%;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product {
+    border: 1px solid #ddd;
+    margin: 20px;
+    padding: 10px;
+    text-align: center;
+    width: 200px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+.image-container{
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+}
+
+.modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 20px;
+    width: fit-content;
+    border: 1px solid #888;
+    text-align: center;
+}
+
+.detail{
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content !important;
+}
+
+.detail div{
+    padding: 0 12px;
+}
+
+.modal-content button{
+    border: none;
+    background-color: none;
+    outline: none;
+    padding: 8px 12px;
+    background-color: #302f2f;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.form-group input, 
+.form-group textarea {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.form-group textarea {
+    height: 60px;
+    resize: vertical;
+}
