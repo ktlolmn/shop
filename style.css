@@ -67,11 +67,12 @@ header img {
     scrollbar-width: none;
 }
 
+
 .modal-content {
+    width: 300px;
     border-radius: 10px;
     background-color: #fff;
     padding: 20px;
-    width: fit-content;
     border: 1px solid #888;
     text-align: center;
 }
@@ -81,7 +82,6 @@ header img {
     flex-wrap: wrap;
     text-align: center;
     justify-content: center;
-    width: fit-content !important;
 }
 
 .detail div{
@@ -91,6 +91,7 @@ header img {
     align-items: center;
     justify-content: center;
 }
+
 
 .modal-content button{
     border: none;
@@ -102,6 +103,7 @@ header img {
     font-size: 16px;
     border-radius: 4px;
     cursor: pointer;
+    margin-bottom: 30px;
 }
 
 .close {
@@ -129,6 +131,7 @@ header img {
 }
 
 #orderForm{
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -25,18 +25,19 @@
 
     <div id="productModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeOrderFormModal()">&times;</span>
+            <span class="close" onclick="closeModal()">&times;</span>
             <h2>Thông tin đơn hàng</h2>
             <div class="detail">
-                <div>
+                <div class="product-detail">
                     <div class="image-container">
                         <img id="image" src="https://cdn.vuahanghieu.com/unsafe/0x900/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2024/07/ao-polo-nam-lacoste-slim-fit-ph4012-031-black-mau-den-size-2-66821a556fc03-01072024095413.jpg" alt="">
                     </div>
                     <h2 id="productTitle"></h2>
                     <p id="productDescription"></p>
                     <p id="productPrice"></p>
+                    <button onclick="orderProduct()">Tiếp tục</button>
                 </div>
-                <div>
+                <div class="infor" style="display: none;">
                     <form id="orderForm" onsubmit="submitOrder(event)">
                         <div class="form-group">
                             <input type="text" id="customerName" placeholder="Họ tên người nhận" required>
@@ -54,7 +55,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -143,6 +143,10 @@
             document.getElementById('productDescription').textContent = product['Mô tả'];
             document.getElementById('productPrice').textContent = `Giá: ${product['Giá'].toLocaleString()} VND`;
             document.getElementById('productModal').style.display = 'flex';
+            document.querySelector('.product-detail').style.display = 'block';
+            const inforSection = document.querySelector('.infor');
+            inforSection.style.display = 'none';
+
         }
 
         function closeModal() {
@@ -183,17 +187,18 @@
             closeModal();
         }
 
-        function orderProduct() {
-            document.getElementById('productModal').style.display = 'none';
-            document.getElementById('orderFormModal').style.display = 'flex';
-        }
-
         function closeOrderFormModal() {
             document.getElementById('productModal').style.display = 'none';
         }
 
         function closeSuccessModal() {
             document.getElementById('orderSuccessModal').style.display = 'none';
+        }
+
+        function orderProduct() {
+            document.querySelector('.product-detail').style.display = 'none';
+            const inforSection = document.querySelector('.infor');
+            inforSection.style.display = 'block';
         }
 
         async function submitOrder(event) {
@@ -222,6 +227,7 @@
                 console.error('Error placing order:', error);
                 alert('Có lỗi xảy ra khi đặt hàng. Vui lòng thử lại!');
             }
+            document.body.style.overflow = 'scroll';
         }
 
         // Load products on page load
