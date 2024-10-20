@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch and Edit Data from Google Sheets API</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+      }
+      table th, table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      table th {
+        background-color: #6a0dad;
+        color: white;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      tr:hover {
+        background-color: #ddd;
+      }
+      input {
+        padding: 4px;
+        border: none;
+        outline: none;
+        background: none;
+      }
+    </style>
+</head>
+<body>
+
+    <h1>Dữ liệu từ Google Sheet</h1>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Họ tên người nhận</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ giao hàng</th>
+                <th>Ghi chú</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+      const apiUrl = 'https://script.google.com/macros/s/AKfycbxrIuJzLK0vWbmyG0S0Ij9NnPV9lnJMZZdFgAT2PoOUDpXZh4qhATqZjVot2KkeH0U3Zg/exec';  // Thay YOUR_API_URL bằng URL của bạn
+      loadData()
+      function loadData() {
+        fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => {
+            const tableBody = document.querySelector('#dataTable tbody');
+            tableBody.innerHTML = '';  // Xóa dữ liệu cũ
+
+            data.forEach((row) => {
+              // Tạo hàng mới trong bảng với các ô có thể chỉnh sửa
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td>${row.Timestamp}</td>
+                <td><input value="${row['Họ tên người nhận']}" onchange="updateData(${row.row}, 'Họ tên người nhận', this.value)"></td>
+                <td><input value="${row['Số điện thoại']}" onchange="updateData(${row.row}, 'Số điện thoại', this.value)"></td>
+                <td><input value="${row['Địa chỉ giao hàng']}" onchange="updateData(${row.row}, 'Địa chỉ giao hàng', this.value)"></td>
+                <td><input value="${row['Ghi chú']}" onchange="updateData(${row.row}, 'Ghi chú', this.value)"></td>
+              `;
+              tableBody.appendChild(tr);
+            });
+          })
+          .catch(error => console.error('Error fetching data:', error));
+      }
+
+      function updateData(row, col, value) {
+        const updateUrl = apiUrl + `?row=${row}&col=${col}&value=${encodeURIComponent(value)}`;
+
+        fetch(updateUrl, {
+          method: 'POST'
+        })
+        .then(response => response.text())
+        .then(result => {
+          console.log('Update successful:', result);
+        })
+        .catch(error => console.error('Error updating data:', error));
+      }
+    </script>
+
+</body>
+</html>
